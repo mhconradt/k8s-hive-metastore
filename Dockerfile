@@ -37,6 +37,10 @@ RUN curl -L https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java
 RUN cp mysql-connector-java-$MYSQL_DRIVER_VERSION/mysql-connector-java-$MYSQL_DRIVER_VERSION.jar $HIVE_HOME/lib
 RUN rm -rf mysql-connector-java-$MYSQL_DRIVER_VERSION
 
+# Enforce Guava consistency
+RUN rm $HIVE_HOME/lib/guava*
+RUN find $HADOOP_HOME/share/hadoop/common/lib/ -name 'guava-*-jre.jar' -exec cp '{}' $HIVE_HOME/lib ';'
+
 # Metastore runs on 9083 by default
 
 COPY ./hadoop-conf /opt/hadoop/etc/hadoop
@@ -44,4 +48,4 @@ COPY ./hive-conf /opt/hive/conf
 
 EXPOSE 9083
 
-CMD ["${HIVE_HOME}/bin/hive", "--service", "metastore"]
+CMD ["/opt/hive/bin/hive", "--service", "metastore"]
