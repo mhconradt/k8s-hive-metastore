@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: hive-metastore
-          image: 452355156841.dkr.ecr.us-east-1.amazonaws.com/metastore
+          image: 452355156841.dkr.ecr.us-east-1.amazonaws.com/metastore:prototype
           imagePullPolicy: Always
           ports:
             - containerPort: 9083
