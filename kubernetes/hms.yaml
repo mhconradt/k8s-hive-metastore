@@ -23,5 +23,5 @@ spec:
             - containerPort: 9083
           resources:
             requests:
-              cpu: 3510m
-              memory: 8192m
+              cpu: 1700m
+              memory: 6500m
