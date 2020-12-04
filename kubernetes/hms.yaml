@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metastore
+  labels:
+    app: hive-metastore
+  namespace: aux
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hive-metastore
+  template:
+    metadata:
+      labels:
+        app: hive-metastore
+    spec:
+      containers:
+        - name: hive-metastore
+          image: 452355156841.dkr.ecr.us-east-1.amazonaws.com/metastore
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9083
+          resources:
+            requests:
+              cpu: 3510m
+              memory: 8192m
